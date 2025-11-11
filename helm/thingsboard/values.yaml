@@ -37,13 +37,13 @@ serviceAccount:
 ingress:
   enabled: false
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
     - chart-example.local
   # Enable or disable tls, same host as above
   tls: false
-  
+  spec:
+    ingressClassName: nginx  
 
 node:
   # kind can be either Deployment or StatefulSet
@@ -261,6 +261,9 @@ cassandra:
   replicaCount: 1
   dbUser:
     password: setplease
+  image:
+    repository: bitnamilegacy/cassandra
+
 
 postgresql-ha:
   nameOverride: pg
@@ -300,3 +303,5 @@ kafka:
   zookeeper:
     persistence:
       enabled: false
+  image:
+    repository: bitnamilegacy/kafka
